@@ -1,6 +1,5 @@
-import ListGroup from "./components/ListGroup";
-
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   let items = ["New York", "San Francisco", "Rome", "Amsterdam", "Munich"];
@@ -10,9 +9,9 @@ function App() {
   };
 
   return (
-    <div>
-      <ListGroup items={items} heading="test" onSelectItem={handleSelectItem} />
-    </div>
+    <>
+      <NavigationBar></NavigationBar>
+    </>
   );
 }
 
