@@ -7,7 +7,7 @@ interface Props {
 function NavigationItem({ items }: Props) {
   return (
     <>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <Nav.Link href={item}>{item}</Nav.Link>
       ))}
     </>

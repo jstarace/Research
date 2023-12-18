@@ -9,12 +9,6 @@ import NavigationItem from "./NavigationItems/NavigationItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-// <Nav.Link href="#home">Home</Nav.Link>
-// <Nav.Link href="#link">Projects</Nav.Link>
-// <Nav.Link href="#link">Publications</Nav.Link>
-// <Nav.Link href="#link">About</Nav.Link>
-// <Nav.Link href="#link">Special Thanks</Nav.Link>
-
 function NavigationBar() {
   let items = ["Home", "Projects", "Publications", "About", "Special Thanks"];
   return (
