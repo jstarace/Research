@@ -1,6 +1,5 @@
 import {
   Navbar,
-  // NavbarBrand,
   NavbarContent,
   NavbarItem,
   Link,
@@ -10,13 +9,8 @@ import {
   Dropdown,
   DropdownMenu,
 } from "@nextui-org/react";
-//import { ChevronDown, LinkedIn } from "../../assets/icons.jsx";
 
 function NavigationBar() {
-  /* const icons = {
-    chevron: <ChevronDown fill="currentColor" size={16} />,
-    linkedin: <LinkedIn size={30} />,
-  };*/
   return (
     <Navbar>
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
@@ -51,7 +45,6 @@ function NavigationBar() {
               <Button
                 disableRipple
                 className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                //endContent={icons.chevron}
                 radius="sm"
                 variant="light"
               >

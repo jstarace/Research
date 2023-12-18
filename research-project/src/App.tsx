@@ -1,6 +1,6 @@
 import { NextUIProvider } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { BrowserRouter as Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import NavigationBar from "./components/header/NavigationBar";
 import Home from "./pages/1.home/Home";
