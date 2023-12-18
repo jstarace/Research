@@ -12,11 +12,7 @@ function App() {
 
   return (
     <div>
-      <ListGroup
-        items={items}
-        heading="Cities"
-        onSelectItem={handleSelectItem}
-      />
+      <ListGroup items={items} heading="test" onSelectItem={handleSelectItem} />
     </div>
   );
 }
