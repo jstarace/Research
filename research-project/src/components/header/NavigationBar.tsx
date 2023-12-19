@@ -115,6 +115,7 @@ function NavigationBar() {
               className="W-full"
               href={index === 0 ? "/" : "/" + `${item}`}
               size="lg"
+              onPress={() => setIsMenuOpen(false)}
             >
               {item}
             </Link>
