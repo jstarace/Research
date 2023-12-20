@@ -12,7 +12,7 @@ export default function Home() {
         <br />
         <h2 className={subtitle()}>This is all very much in development.</h2>
         <h3 className={subtitle({ class: "mt-4" })}>
-          Here is where I`&apos;`ll host my work and collaborate with others on
+          Here is where I&apos;ll host my work and collaborate with others on
           current and future research.
         </h3>
       </div>
