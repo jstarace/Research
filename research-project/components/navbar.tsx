@@ -42,9 +42,10 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky" isBordered isBlurred>
+      {/* This is where we define the navbar in full screen */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarMenuToggle />
-        <ul className="hidden lg:flex gap-6 justify-start ml-2">
+        <NavbarMenuToggle className="sm:hidden" />
+        <ul className="hidden sm:flex gap-3 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -61,38 +62,7 @@ export const Navbar = () => {
           ))}
         </ul>
       </NavbarContent>
-
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-4">
-          <Link
-            isExternal
-            href={siteConfig.links.linkedin}
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon className="text-default-500" />
-          </Link>
-          <Link isExternal href={siteConfig.links.github} aria-label="Github">
-            <GithubIcon className="text-default-500" />
-          </Link>
-          <ThemeSwitch />
-        </NavbarItem>
-        <NavbarItem className="md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.login}
-            variant="flat"
-          >
-            Login
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+      <NavbarContent className="basis-1 pl-1" justify="end">
         <Link isExternal href={siteConfig.links.linkedin} aria-label="LinkedIn">
           <LinkedInIcon className="text-default-500" />
         </Link>
@@ -100,6 +70,7 @@ export const Navbar = () => {
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
+
         <NavbarItem className="md:flex">
           <Button
             isExternal
