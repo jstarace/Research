@@ -45,6 +45,15 @@ export default async function ProjectsPage() {
             ))}
           </ul>
         </div>
+        <div>
+          <ul>
+            {projects.map((projects) => (
+              <li className="mb-10" key={projects.id}>
+                {String(projects.start_date)}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
