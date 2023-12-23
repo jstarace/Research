@@ -1,0 +1,16 @@
+{
+  "id": "mig_cm36f13bg06p0tdtfg60",
+  "parentID": "mig_cm36e5bju5la92mjeeb0",
+  "checksum": "1:bc3d1d16bc65f7ad13b75bc8b8569fb42e132216f14b1b78554052ad03d3d155",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "paper_title",
+          "type": "string"
+        },
+        "table": "method_2_results"
+      }
+    }
+  ]
+}

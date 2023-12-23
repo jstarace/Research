@@ -1,0 +1,17 @@
+{
+  "id": "mig_cm374irbg06p0tdtfgdg",
+  "parentID": "mig_cm3748bju5la92mjeekg",
+  "checksum": "1:32af5380da51c0bde8b1ac4942ed9bf013d1a5ea849e67e76d48f4492dadf024",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "user_id",
+          "type": "string",
+          "unique": true
+        },
+        "table": "project_collaborators"
+      }
+    }
+  ]
+}

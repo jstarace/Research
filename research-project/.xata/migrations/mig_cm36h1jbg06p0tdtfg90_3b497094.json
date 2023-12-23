@@ -1,0 +1,16 @@
+{
+  "id": "mig_cm36h1jbg06p0tdtfg90",
+  "parentID": "mig_cm36fabbg06p0tdtfg80",
+  "checksum": "1:3b497094e99b96e9da4a89c2f6877b022ec1d287b41af48a91368ad7670bf955",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "publication_date",
+          "type": "datetime"
+        },
+        "table": "method_2_results"
+      }
+    }
+  ]
+}

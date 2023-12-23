@@ -1,0 +1,18 @@
+{
+  "id": "mig_cm3750bju5la92mjeelg",
+  "parentID": "mig_cm374irbg06p0tdtfgdg",
+  "checksum": "1:e98c217b092da4cb5bc9b2073382f86d829148ddb62fda55cd3956e202dc80eb",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "first_name",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "johnny"
+        },
+        "table": "project_collaborators"
+      }
+    }
+  ]
+}

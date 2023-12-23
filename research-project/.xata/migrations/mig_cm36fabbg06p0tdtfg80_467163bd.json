@@ -1,0 +1,16 @@
+{
+  "id": "mig_cm36fabbg06p0tdtfg80",
+  "parentID": "mig_cm36f63bg06p0tdtfg70",
+  "checksum": "1:467163bdf48f7e6a1b223e837c1d4e34206753c17a412f39c9c33bf9523523d9",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "DOI",
+          "type": "string"
+        },
+        "table": "method_2_results"
+      }
+    }
+  ]
+}

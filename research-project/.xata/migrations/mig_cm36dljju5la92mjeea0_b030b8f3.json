@@ -1,0 +1,17 @@
+{
+  "id": "mig_cm36dljju5la92mjeea0",
+  "parentID": "mig_cm36cijju5la92mjee90",
+  "checksum": "1:b030b8f3156dc232a15f5ccafe08620f0dc1c26b85582322b803d56955fbc224",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "string_id",
+          "type": "int",
+          "unique": true
+        },
+        "table": "search_string"
+      }
+    }
+  ]
+}

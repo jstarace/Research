@@ -1,0 +1,18 @@
+{
+  "id": "mig_cm37563ju5la92mjeemg",
+  "parentID": "mig_cm3750bju5la92mjeelg",
+  "checksum": "1:61976f95413f8c15068050e0196f3b5e5c0004b4c2951887aa0f495796428d0e",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "last_name",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "appleseed"
+        },
+        "table": "project_collaborators"
+      }
+    }
+  ]
+}

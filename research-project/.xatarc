@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://jstarace-s-workspace-ko759t.us-east-1.xata.sh/db/research-papers-db",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

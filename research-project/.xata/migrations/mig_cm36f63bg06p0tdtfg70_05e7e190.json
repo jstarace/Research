@@ -1,0 +1,16 @@
+{
+  "id": "mig_cm36f63bg06p0tdtfg70",
+  "parentID": "mig_cm36f13bg06p0tdtfg60",
+  "checksum": "1:05e7e19076d86d9570180b92953db816d781137412935adb5e685f75918e71ec",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "authors",
+          "type": "string"
+        },
+        "table": "method_2_results"
+      }
+    }
+  ]
+}
