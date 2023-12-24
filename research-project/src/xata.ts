@@ -121,6 +121,13 @@ let instance: XataClient | undefined = undefined;
 export const getXataClient = () => {
   if (instance) return instance;
 
-  instance = new XataClient();
+  instance = new XataClient({
+    enableBrowser: true,
+    databaseURL:
+      "https://jstarace-s-workspace-ko759t.us-east-1.xata.sh/db/research-papers-db",
+    apiKey: "xau_GFg5Z5eV9zlaSsN75U8gUOsAS6MF5czZ",
+    fetch: fetch,
+    branch: "main",
+  });
   return instance;
 };
