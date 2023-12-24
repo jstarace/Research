@@ -1,5 +1,4 @@
 import React from "react";
-//import { XataClient } from "@/research-project/xata";
 import { getXataClient } from "../../src/xata";
 import { Divider } from "@nextui-org/divider";
 import { auth, currentUser } from "@clerk/nextjs";
@@ -45,6 +44,7 @@ export default async function ProjectsPage() {
             ))}
           </ul>
         </div>
+        <Divider orientation="vertical" className="mx-4" />
         <div>
           <ul>
             {projects.map((projects) => (

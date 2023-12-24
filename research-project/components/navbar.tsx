@@ -69,7 +69,7 @@ export const Navbar = () => {
             //   Login
             // </Button>
           )}
-          {!user && <SignInButton afterSignInUrl="/" />}
+          {!user && <SignInButton afterSignInUrl="/projects" />}
         </NavbarItem>
       </NavbarContent>
 
