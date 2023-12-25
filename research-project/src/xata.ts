@@ -33,7 +33,19 @@ const tables = [
       { name: "end_date", type: "datetime" },
     ],
   },
-  { name: "project_members", columns: [] },
+  {
+    name: "project_members",
+    columns: [
+      {
+        name: "project_x_id",
+        type: "string",
+        notNull: true,
+        defaultValue: "-1",
+      },
+      { name: "user_c_id", type: "string", notNull: true, defaultValue: "-1" },
+      { name: "approved", type: "bool", notNull: true, defaultValue: "false" },
+    ],
+  },
   {
     name: "search_string",
     columns: [

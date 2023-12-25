@@ -25,6 +25,7 @@
     "@nextui-org/theme": "2.1.17",
     "@react-aria/ssr": "^3.9.1",
     "@react-aria/visually-hidden": "^3.8.8",
+    "@react-stately/data": "^3.11.0",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "@types/react-dom": "18.2.18",

@@ -10,6 +10,20 @@ import {
 } from "@nextui-org/table";
 import { useEffect, useState } from "react";
 import { fetchProjects } from "@/app/lib/data";
+import { fetchAccessLists } from "@/app/lib/accessLists";
+import { refreshAccess } from "@/app/lib/refreshAccess";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Link,
+  Image,
+} from "@nextui-org/react";
+import React from "react";
+import { useUser } from "@clerk/nextjs";
+import { Button } from "@nextui-org/button";
 
 type Project = {
   description?: string | null | undefined;
@@ -26,8 +40,38 @@ type Project = {
   };
 }[];
 
+type AccessList = {
+  approved?: Boolean | null | undefined;
+  id?: String | null | undefined;
+  project_x_id?: String | null | undefined;
+  user_c_id?: String | null | undefined;
+  xata?: {
+    createdAt?: Date | null | undefined;
+    updatedAt?: Date | null | undefined;
+    version?: Number | null | undefined;
+  };
+}[];
+
 export function ProjectTable() {
   const [project, setProject] = useState<Project | null>(null);
+  const [accessList, setAccessList] = useState<AccessList | null>(null);
+  const { user, isLoaded } = useUser();
+
+  const theAccessLists = async () => {
+    let accessList: AccessList;
+    fetchAccessLists()
+      .then((data) => {
+        accessList = data;
+        if (accessList) setAccessList(accessList);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch access lists:", error);
+      });
+  };
+  useEffect(() => {
+    theAccessLists();
+  }, []);
+
   const theProjects = async () => {
     let project: Project;
     fetchProjects()
@@ -35,24 +79,40 @@ export function ProjectTable() {
         //project = JSON.parse(data);
         project = data;
         if (project) setProject(project);
-        console.log(project);
       })
       .catch((error) => {
         console.error("Failed to fetch projects:", error);
       });
   };
+
+  const clerkId = async () => {};
+
   useEffect(() => {
     theProjects();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      refreshAccess(user.id);
+    }
+  }, [user]);
+
   if (project) {
     return (
       <>
-        <Table aria-label="Example static collection table">
+        <Table
+          onRowAction={(key) => console.log(key)}
+          color="primary"
+          selectionMode="single"
+          defaultSelectedKeys={[-1]}
+          aria-label="A table of projects I've worked on or am working on"
+        >
           <TableHeader>
             <TableColumn>NAME</TableColumn>
             <TableColumn>DESCRIPTION</TableColumn>
             <TableColumn>STATUS</TableColumn>
+            <TableColumn>START DATE</TableColumn>
+            <TableColumn>{""}</TableColumn>
           </TableHeader>
           <TableBody>
             {project.map((project) => (
@@ -60,6 +120,32 @@ export function ProjectTable() {
                 <TableCell>{project.name}</TableCell>
                 <TableCell>{project.description}</TableCell>
                 <TableCell>{project.status}</TableCell>
+                <TableCell>
+                  {new Date(
+                    project.start_date ?? "10/07/1979"
+                  ).toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                  {isLoaded &&
+                  user &&
+                  accessList &&
+                  accessList.some(
+                    (access) =>
+                      access.project_x_id === project.id &&
+                      access.user_c_id === user.id
+                  ) ? (
+                    <Button
+                      size="sm"
+                      radius="lg"
+                      color="primary"
+                      variant="ghost"
+                    >
+                      Admin
+                    </Button>
+                  ) : (
+                    ""
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -70,34 +156,13 @@ export function ProjectTable() {
 
   return (
     <>
-      <Table aria-label="Example static collection table">
+      <Table aria-label="Example empty table">
         <TableHeader>
           <TableColumn>NAME</TableColumn>
-          <TableColumn>ROLE</TableColumn>
+          <TableColumn>DESCRIPTION</TableColumn>
           <TableColumn>STATUS</TableColumn>
         </TableHeader>
-        <TableBody>
-          <TableRow key="1">
-            <TableCell>Tony Reichert</TableCell>
-            <TableCell>CEO</TableCell>
-            <TableCell>Active</TableCell>
-          </TableRow>
-          <TableRow key="2">
-            <TableCell>Zoey Lang</TableCell>
-            <TableCell>Technical Lead</TableCell>
-            <TableCell>Paused</TableCell>
-          </TableRow>
-          <TableRow key="3">
-            <TableCell>Jane Fisher</TableCell>
-            <TableCell>Senior Developer</TableCell>
-            <TableCell>Active</TableCell>
-          </TableRow>
-          <TableRow key="4">
-            <TableCell>William Howard</TableCell>
-            <TableCell>Community Manager</TableCell>
-            <TableCell>Vacation</TableCell>
-          </TableRow>
-        </TableBody>
+        <TableBody emptyContent={"Loading Projects"}>{[]}</TableBody>
       </Table>
     </>
   );
