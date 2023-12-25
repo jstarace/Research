@@ -134,14 +134,16 @@ export function ProjectTable() {
                       access.project_x_id === project.id &&
                       access.user_c_id === user.id
                   ) ? (
-                    <Button
-                      size="sm"
-                      radius="lg"
-                      color="primary"
-                      variant="ghost"
-                    >
-                      Admin
-                    </Button>
+                    <Link href={`../projects/admin/${project.id}`}>
+                      <Button
+                        size="sm"
+                        radius="lg"
+                        color="primary"
+                        variant="ghost"
+                      >
+                        Admin
+                      </Button>
+                    </Link>
                   ) : (
                     ""
                   )}
