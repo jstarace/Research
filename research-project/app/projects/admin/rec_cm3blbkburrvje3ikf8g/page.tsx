@@ -2,38 +2,24 @@
 
 import { useEffect } from "react";
 import { title } from "@/components/primitives";
+import { Search } from "@/components/search";
+import { useState } from "react";
 
 export default function ReviewPaperAdminPage() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cse.google.com/cse.js?cx=51bc2f4d283784e3a";
-    script.async = true;
-    document.body.appendChild(script);
+  const [searchValue, setSearchValue] = useState("");
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cse.google.com/cse.js?cx=51bc2f4d283784e3a";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  const handleSearch = (value: string) => {
+    console.log(value);
+    setSearchValue(value);
+  };
 
   return (
     <>
       <div>
         <h1 className={title()}>Review Paper</h1>
       </div>
-      <div className="gcse-search">
-        <div className="gcse-search"></div>
-      </div>
+
+      <Search onSearch={handleSearch} />
     </>
   );
 }
