@@ -33,6 +33,7 @@ type Project = {
   project_id?: Number | null | undefined;
   start_date?: Date | null | undefined;
   status?: String | null | undefined;
+  adminPages?: Boolean | null | undefined;
   xata?: {
     createdAt?: Date | null | undefined;
     updatedAt?: Date | null | undefined;
@@ -127,6 +128,7 @@ export function ProjectTable() {
                 </TableCell>
                 <TableCell>
                   {isLoaded &&
+                  project.adminPages &&
                   user &&
                   accessList &&
                   accessList.some(

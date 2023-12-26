@@ -31,6 +31,12 @@ const tables = [
         defaultValue: "2020-06-01T08:00:00.000Z",
       },
       { name: "end_date", type: "datetime" },
+      {
+        name: "adminPages",
+        type: "bool",
+        notNull: true,
+        defaultValue: "false",
+      },
     ],
   },
   {
