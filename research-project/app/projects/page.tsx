@@ -12,13 +12,6 @@ export default function ProjectsPage() {
     <>
       <div className="flex justify-center items-center w-full">
         <h1 className={title()}>Current and past projects.</h1>
-        {/* <div className="ml-auto mt-4">
-          {userId ? (
-            <Button size="sm" radius="lg" color="primary" variant="ghost">
-              Admin
-            </Button>
-          ) : null}
-        </div> */}
       </div>
       <Divider className="my-4 w-full" />
       <ProjectTable />

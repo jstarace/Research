@@ -18,12 +18,13 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Link,
+  //Link,
   Image,
 } from "@nextui-org/react";
 import React from "react";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 type Project = {
   description?: string | null | undefined;
@@ -136,7 +137,10 @@ export function ProjectTable() {
                       access.project_x_id === project.id &&
                       access.user_c_id === user.id
                   ) ? (
-                    <Link href={`../projects/admin/${project.id}`}>
+                    <Link
+                      href={`../projects/admin/${project.id}`}
+                      prefetch={false}
+                    >
                       <Button
                         size="sm"
                         radius="lg"
