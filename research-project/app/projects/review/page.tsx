@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import { title } from "@/components/primitives";
 import { Search } from "@/components/search";
 import { useState } from "react";
-import { useFetchSpringerArticles } from "@/api/fetchHooks";
-
-export default function ReviewPaperAdminPage() {
+import { useFetchSpringerArticles } from "../../api/reviewPage/fetchHooks"
+export default function Review() {
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState(null);
 
@@ -15,6 +14,7 @@ export default function ReviewPaperAdminPage() {
     const { data } = useFetchSpringerArticles(searchValue);
     setData(data);
   }, [searchValue]);
+
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
@@ -25,9 +25,7 @@ export default function ReviewPaperAdminPage() {
       <div>
         <h1 className={title()}>Review Paper</h1>
       </div>
-      <div>
-        <h1>fuck off</h1>
-      </div>
+
       <Search onSearch={handleSearch} />
     </>
   );

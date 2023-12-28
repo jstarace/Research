@@ -2,6 +2,12 @@ import React, { ChangeEvent, useState } from "react";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "./icons";
 
+
+// This is new so remove if needed.
+type Props={
+  setQuery: React.Dispatch<React.SetStateAction<string>>
+}
+
 export type SearchProps = {
   onSearch: (value: string) => void;
 };
@@ -14,6 +20,8 @@ export const Search = (props: SearchProps) => {
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     setValue(target.value);
+    // Fetch to api here
+    
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

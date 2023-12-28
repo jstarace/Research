@@ -1,6 +1,4 @@
-import ProviderWrapper from "./ProviderWrapper";
-
-export default function BlogLayout({
+export default function Projects({
   children,
 }: {
   children: React.ReactNode;
@@ -8,7 +6,7 @@ export default function BlogLayout({
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div>
-        <ProviderWrapper>{children}</ProviderWrapper>
+        {children}
       </div>
     </section>
   );

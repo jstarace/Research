@@ -1,9 +1,8 @@
 import React from "react";
-import { ProjectTable } from "@/components/ProjectTable";
+import { ProjectTable } from "@/components/projectTable";
 import { Divider } from "@nextui-org/divider";
 import { auth, currentUser } from "@clerk/nextjs";
 import { title } from "@/components/primitives";
-//import { Button } from "@nextui-org/button";
 
 export default function ProjectsPage() {
   const { userId } = auth();

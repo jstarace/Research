@@ -11,9 +11,20 @@ export default authMiddleware({
     "/About",
     "/SpecialThanks",
     "/api/get_projects",
+    "/public"
   ],
 });
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    /*
+      * Ignore request paths starting with:
+      * - api (API routes)
+      * - _next/static (static files)
+      * - _next/image (image optimization files)
+      * - favicon.ico (favicon file)
+      */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    "/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)",
+  ],
 };
