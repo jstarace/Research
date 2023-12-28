@@ -20,8 +20,6 @@ export const Search = (props: SearchProps) => {
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     setValue(target.value);
-    // Fetch to api here
-    
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
