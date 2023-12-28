@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectTable } from "@/components/projectTable";
+import { ProjectTable } from "@/components/ProjectTable";
 import { Divider } from "@nextui-org/divider";
 import { auth, currentUser } from "@clerk/nextjs";
 import { title } from "@/components/primitives";

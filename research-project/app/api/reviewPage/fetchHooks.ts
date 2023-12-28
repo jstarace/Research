@@ -3,7 +3,7 @@ import { basicFetch } from "./fetchFunctions";
 import { SpringerArticles } from "./types";
 import { OPEN_ACCESS_BASE_URL } from "../../config";
 
-export const useFetchSpringerArticles = (search: string) => {
+export const FetchSpringerArticles = async (search: string): Promise<SpringerArticles> => {
   console.log("The hook:", search);
   const theBase = "https://api.springernature.com/"
   const theEndpoint ="openaccess/json?api_key="

@@ -4,15 +4,20 @@ import { useEffect } from "react";
 import { title } from "@/components/primitives";
 import { Search } from "@/components/search";
 import { useState } from "react";
-import { useFetchSpringerArticles } from "../../api/reviewPage/fetchHooks"
+import { FetchSpringerArticles } from "../../api/reviewPage/fetchHooks"
+import { Articles, SpringerArticles } from "../../api/reviewPage/types"
+
 export default function Review() {
   const [searchValue, setSearchValue] = useState("");
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<SpringerArticles | null>(null);
 
   useEffect(() => {
     if (!searchValue) return;
-    const { data } = useFetchSpringerArticles(searchValue);
-    setData(data);
+    const fetchData = async () => {
+      const result: SpringerArticles = await FetchSpringerArticles(searchValue);
+      setData(result);
+    };
+    fetchData();
   }, [searchValue]);
 
 
