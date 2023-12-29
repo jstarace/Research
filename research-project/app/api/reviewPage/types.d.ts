@@ -1,10 +1,13 @@
 export type SpringerArticles = {
-  results: Articles[];
-  total_pages: number;
+  facets: [];
+  query: string;
+  records: [];
+  result: [];
 };
 
 export type Articles = {
-  query: string;
+  abstract: [];
+  contentType: string;
   language: string;
   authors: [];
   title: string;
@@ -14,5 +17,5 @@ export type Articles = {
   publisherName: string;
   publicationDate: string;
   publicationType: string;
-  abstract: [];
+  
 }
