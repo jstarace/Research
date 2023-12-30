@@ -5,11 +5,16 @@ export type SpringerArticles = {
   result: [];
 };
 
+export type Author = {
+  ORCID: string | null;
+  creator: string;
+}
+
 export type Articles = {
   abstract: [];
   contentType: string;
   language: string;
-  authors: [];
+  authors: Author[];
   title: string;
   publicationName: string;
   doi: string;
@@ -19,3 +24,5 @@ export type Articles = {
   publicationType: string;
   
 }
+
+
