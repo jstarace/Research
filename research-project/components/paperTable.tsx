@@ -101,8 +101,8 @@ export const PaperTable: React.FC<PaperTableProps> = ({ data }) => {
       <>
         <div className="text-center text-3x1 my-10">
           <h1>
-            Your search for &quot{finalQuery}&quot returned: {totalArticles}{" "}
-            results{" "}
+            Your search for &quot;{finalQuery}&quot; returned: {totalArticles}
+            results
           </h1>
         </div>
         <Table
@@ -124,7 +124,6 @@ export const PaperTable: React.FC<PaperTableProps> = ({ data }) => {
                   {article.title}
                 </TableCell>
                 <TableCell>
-                  {" "}
                   {article.authors.map((author, index) => (
                     <div key={index}>{author.creator}</div>
                   ))}
