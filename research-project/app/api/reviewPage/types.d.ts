@@ -1,8 +1,15 @@
+export type Result = {
+  pageLength: number;
+  recordsDisplayed: number;
+  start: number;
+  total: number;
+}
+
 export type SpringerArticles = {
   facets: [];
   query: string;
   records: [];
-  result: [];
+  result: Result[];
 };
 
 export type Author = {

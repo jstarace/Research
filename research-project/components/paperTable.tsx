@@ -34,11 +34,13 @@ approved: "success",
 rejected: "error",
 };
 
-  const INITIAL_VISIBLE_COLUMNS = ["title", "date", "type", "action"];
+const INITIAL_VISIBLE_COLUMNS = ["title", "date", "type", "action"];
 
 export const PaperTable: React.FC<PaperTableProps> = ({data}) => {
 
     const [articles, setArticles] = useState<Articles[]>([]);
+    const [totalArticles, setTotalArticles] = useState(0);
+    const [finalQuery, setFinalQuery] = useState("");
     const [filterValue, setFilterValue] = useState("");
     const [selectedKeys, setSelectedKeys] = useState(new Set([]));
     const [visibleColumns, setVisibleColumns] = useState(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -49,27 +51,32 @@ export const PaperTable: React.FC<PaperTableProps> = ({data}) => {
     });
     
     useEffect(() => {
-    if (!data) return;
-    console.log("Data is: ", data.query);
-    const articles: Articles[] = data.records.map((article: any) => ({
-        abstract: article.abstract,
-        contentType: article.contentType,
-        language: article.language,
-        authors: article.creators || [],
-        title: article.title,
-        publicationName: article.publicationName,
-        doi: article.doi,
-        publisher: article.publisher,
-        publisherName: article.publisherName,
-        publicationDate: article.publicationDate,
-        publicationType: article.publicationType,
+    //As implied, if data is empty we do nothing else here, just jump out of the function
+        if (!data) return;
+        // If there is data we want to print the data to the console until we're sure we're grabbing all that we need
+        console.log("Data is: ", data.query);
+        const articles: Articles[] = data.records.map((article: any) => ({
+            abstract: article.abstract,
+            contentType: article.contentType,
+            language: article.language,
+            authors: article.creators || [],
+            title: article.title,
+            publicationName: article.publicationName,
+            doi: article.doi,
+            publisher: article.publisher,
+            publisherName: article.publisherName,
+            publicationDate: article.publicationDate,
+            publicationType: article.publicationType,
 
-    }));
-    setArticles(articles);
+        }));
+        if(data?.result?.length >0 ){
+            console.log("Data results are: ", data.result[0].total);
+            setTotalArticles(data.result[0].total);
+        }
+        setArticles(articles);
+        setFinalQuery(data.query);
     }, [data]);
-    if(articles.length > 0){
-        console.log("Articles are: ", articles);
-    }
+
 /*
     const hasSearchFilter = Boolean(filterValue);
 
@@ -93,6 +100,9 @@ export const PaperTable: React.FC<PaperTableProps> = ({data}) => {
   if(articles.length !== 0){
     return (
         <>
+        <div className="text-center text-3x1 my-10">
+            <h1>Your search for "{finalQuery}" returned: {totalArticles} results </h1>
+        </div>
             <Table
             color="primary"
             selectionMode="single"
