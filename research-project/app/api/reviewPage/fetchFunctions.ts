@@ -8,7 +8,6 @@ export const basicFetch = async <Response>(
   const response = await fetch(endpoint);
   if (!response.ok) throw new Error(`Error! ${response?.statusText}`);
   const data = await response.json();
-  console.log("The data here is: ", data);
-  
+
   return data;
 };

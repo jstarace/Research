@@ -3,7 +3,7 @@ export type Result = {
   recordsDisplayed: number;
   start: number;
   total: number;
-}
+};
 
 export type SpringerArticles = {
   facets: [];
@@ -13,23 +13,32 @@ export type SpringerArticles = {
 };
 
 export type Author = {
-  ORCID: string | null;
+  //ORCID: string | null;
   creator: string;
-}
+};
+
+export type Abstract = {
+  h1: string | null;
+  p: string;
+};
 
 export type Articles = {
-  abstract: [];
-  contentType: string;
-  language: string;
-  authors: Author[];
-  title: string;
-  publicationName: string;
   doi: string;
+  search_id: string;
+  title: string;
+  content_type: string;
+  issue_number: string;
+  issue_type: string;
+  journal_id: string;
+  online_date: datetime;
+  publication_date: datetime;
+  publication_name: string;
+  publication_type: string;
   publisher: string;
-  publisherName: string;
-  publicationDate: string;
-  publicationType: string;
-  
-}
-
-
+  abstract: string;
+  subject: [];
+  url: string;
+  status: boolean | null;
+  language: string;
+  authors: [];
+};

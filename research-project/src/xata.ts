@@ -56,23 +56,12 @@ const tables = [
     name: "search_string",
     columns: [
       { name: "search_term", type: "string", notNull: true, defaultValue: "1" },
-      { name: "string_id", type: "int", unique: true },
-    ],
-    revLinks: [{ column: "string_id", table: "method_2_results" }],
-  },
-  {
-    name: "method_2_results",
-    columns: [
       {
-        name: "string_id",
-        type: "link",
-        link: { table: "search_string" },
-        unique: true,
+        name: "user_c_id",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
       },
-      { name: "paper_title", type: "string" },
-      { name: "authors", type: "string" },
-      { name: "DOI", type: "string" },
-      { name: "publication_date", type: "datetime" },
     ],
   },
   {
@@ -93,6 +82,80 @@ const tables = [
       },
     ],
   },
+  {
+    name: "search_string_results",
+    columns: [
+      { name: "title", type: "string" },
+      { name: "content_type", type: "string" },
+      {
+        name: "issue_number",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "issue_type",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "journal_id",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "online_date",
+        type: "datetime",
+        notNull: true,
+        defaultValue: "now",
+      },
+      {
+        name: "publication_date",
+        type: "datetime",
+        notNull: true,
+        defaultValue: "now",
+      },
+      {
+        name: "publication_name",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "publication_type",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "publisher",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      { name: "subject", type: "multiple" },
+      { name: "url", type: "string", notNull: true, defaultValue: "null" },
+      { name: "status", type: "bool" },
+      { name: "authors", type: "multiple" },
+      { name: "language", type: "string", notNull: true, defaultValue: "null" },
+      {
+        name: "volume_number",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      {
+        name: "search_id",
+        type: "string",
+        notNull: true,
+        defaultValue: "null",
+      },
+      { name: "abstract", type: "text", notNull: true, defaultValue: "n/a" },
+      { name: "doi", type: "string", notNull: true, defaultValue: "null" },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -107,18 +170,18 @@ export type ProjectMembersRecord = ProjectMembers & XataRecord;
 export type SearchString = InferredTypes["search_string"];
 export type SearchStringRecord = SearchString & XataRecord;
 
-export type Method2Results = InferredTypes["method_2_results"];
-export type Method2ResultsRecord = Method2Results & XataRecord;
-
 export type ProjectCollaborators = InferredTypes["project_collaborators"];
 export type ProjectCollaboratorsRecord = ProjectCollaborators & XataRecord;
+
+export type SearchStringResults = InferredTypes["search_string_results"];
+export type SearchStringResultsRecord = SearchStringResults & XataRecord;
 
 export type DatabaseSchema = {
   project_name: ProjectNameRecord;
   project_members: ProjectMembersRecord;
   search_string: SearchStringRecord;
-  method_2_results: Method2ResultsRecord;
   project_collaborators: ProjectCollaboratorsRecord;
+  search_string_results: SearchStringResultsRecord;
 };
 
 const DatabaseClient = buildClient();

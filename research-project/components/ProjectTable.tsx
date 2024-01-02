@@ -137,10 +137,7 @@ export function ProjectTable() {
                       access.project_x_id === project.id &&
                       access.user_c_id === user.id
                   ) ? (
-                    <Link
-                      href={`../projects/review/`}
-                      prefetch={false}
-                    >
+                    <Link href={`../projects/review/`} prefetch={false}>
                       <Button
                         size="sm"
                         radius="lg"
