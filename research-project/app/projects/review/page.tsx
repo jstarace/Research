@@ -11,6 +11,7 @@ import { Divider } from "@nextui-org/divider";
 import { getXataClient } from "@/src/xata";
 import { useAuth } from "@clerk/nextjs";
 import { POST } from "@/app/api/projects/review/route";
+import { usePutArticles } from "@/app/api/projects/fetchHooks";
 
 const xata = getXataClient();
 
@@ -103,17 +104,22 @@ export default function Review() {
   // This useEffect will upload the search results to xata
   useEffect(() => {
     if (!tempData) return;
-    const uploadData = async () => {
-      const result = await POST(tempData);
+    console.log("Now we're going to send to xata:");
+    const UploadData = async () => {
+      const result = await usePutArticles(tempData);
+      //const result = await POST(tempData);
       console.log("The result is: ", result);
-      if (result) {
-        console.log("The status of the result is: ", result.ok);
-        if (result.ok) {
-          setSearchId(newSearchId);
-        }
+      if(result && result.length > 0){
+        setSearchId(newSearchId);
       }
+      // if (result) {
+      //   console.log("The status of the result is: ", result.ok);
+      //   if (result.ok) {
+      //     setSearchId(newSearchId);
+      //   }
+      // }
     };
-    uploadData();
+    UploadData();
   }, [tempData]);
 
   // This useEffect will search xata for the search id and return the results

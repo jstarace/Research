@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { OPEN_ACCESS_BASE_URL } from "../config";
+import { OPEN_ACCESS_BASE_URL } from "../../config";
 //import { basicFetch } from "./fetchFunctions";
 
 export async function GET(req: NextRequest) {
