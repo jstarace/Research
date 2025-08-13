@@ -4,7 +4,13 @@
   "private": true,
   "description": "Jason Starace's personal research portfolio website featuring liquid glass morphism effects and interactive navigation",
   "author": "Jason Starace",
-  "keywords": ["portfolio", "research", "nextjs", "typescript", "glassmorphism"],
+  "keywords": [
+    "portfolio",
+    "research",
+    "nextjs",
+    "typescript",
+    "glassmorphism"
+  ],
   "homepage": "https://staraceresearch.com",
   "scripts": {
     "dev": "next dev",
@@ -17,12 +23,13 @@
     "npm": ">=9.0.0"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.454.0",
     "next": "^14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "lucide-react": "^0.454.0",
-    "clsx": "^2.1.1",
-    "class-variance-authority": "^0.7.1",
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
