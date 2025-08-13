@@ -22,33 +22,6 @@ export default function HomePage() {
   const [showPageContent, setShowPageContent] = useState(false)
   const [isMenuExpanded, setIsMenuExpanded] = useState(false)
 
-  // Initialize state from URL and localStorage on mount
-  useEffect(() => {
-    // Check current URL path to determine selected button
-    const currentPath = window.location.pathname
-    const buttonFromPath = buttons.find(b => b.route === currentPath)
-    
-    if (buttonFromPath) {
-      setSelectedButton(buttonFromPath.id)
-      setShowPageContent(true)
-    }
-
-    // Get or set background index
-    const savedBgIndex = localStorage.getItem('bgIndex')
-    if (savedBgIndex !== null && !isNaN(Number(savedBgIndex))) {
-      setCurrentBgIndex(Number(savedBgIndex))
-    } else {
-      const randomIndex = Math.floor(Math.random() * backgroundImages.length)
-      setCurrentBgIndex(randomIndex)
-      localStorage.setItem('bgIndex', randomIndex.toString())
-    }
-  }, [])
-
-  // Don't render until background is selected
-  if (currentBgIndex === null) {
-    return null
-  }
-
   const buttons = [
     {
       id: 'profile',
@@ -112,6 +85,33 @@ export default function HomePage() {
 
   const handleMenuToggle = () => {
     setIsMenuExpanded(!isMenuExpanded)
+  }
+
+  // Initialize state from URL and localStorage on mount
+  useEffect(() => {
+    // Check current URL path to determine selected button
+    const currentPath = window.location.pathname
+    const buttonFromPath = buttons.find(b => b.route === currentPath)
+    
+    if (buttonFromPath) {
+      setSelectedButton(buttonFromPath.id)
+      setShowPageContent(true)
+    }
+
+    // Get or set background index
+    const savedBgIndex = localStorage.getItem('bgIndex')
+    if (savedBgIndex !== null && !isNaN(Number(savedBgIndex))) {
+      setCurrentBgIndex(Number(savedBgIndex))
+    } else {
+      const randomIndex = Math.floor(Math.random() * backgroundImages.length)
+      setCurrentBgIndex(randomIndex)
+      localStorage.setItem('bgIndex', randomIndex.toString())
+    }
+  }, [])
+
+  // Don't render until background is selected
+  if (currentBgIndex === null) {
+    return null
   }
 
   const selectedButtonData = buttons.find(b => b.id === selectedButton)
