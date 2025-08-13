@@ -14,7 +14,7 @@ export default function HomePage() {
     '/images/wakeup.jpg',
   ]
 
-  // Background system - initialize with random image
+  // Background system - initialize with random image but persist selection
   const [currentBgIndex, setCurrentBgIndex] = useState<number | null>(null)
   const [hoveredButton, setHoveredButton] = useState<string | null>(null)
   const [selectedButton, setSelectedButton] = useState<string | null>(null)
@@ -22,10 +22,26 @@ export default function HomePage() {
   const [showPageContent, setShowPageContent] = useState(false)
   const [isMenuExpanded, setIsMenuExpanded] = useState(false)
 
-  // Set random background on mount
+  // Initialize state from URL and localStorage on mount
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * backgroundImages.length)
-    setCurrentBgIndex(randomIndex)
+    // Check current URL path to determine selected button
+    const currentPath = window.location.pathname
+    const buttonFromPath = buttons.find(b => b.route === currentPath)
+    
+    if (buttonFromPath) {
+      setSelectedButton(buttonFromPath.id)
+      setShowPageContent(true)
+    }
+
+    // Get or set background index
+    const savedBgIndex = localStorage.getItem('bgIndex')
+    if (savedBgIndex !== null && !isNaN(Number(savedBgIndex))) {
+      setCurrentBgIndex(Number(savedBgIndex))
+    } else {
+      const randomIndex = Math.floor(Math.random() * backgroundImages.length)
+      setCurrentBgIndex(randomIndex)
+      localStorage.setItem('bgIndex', randomIndex.toString())
+    }
   }, [])
 
   // Don't render until background is selected
@@ -351,7 +367,10 @@ export default function HomePage() {
           {backgroundImages.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentBgIndex(index)}
+              onClick={() => {
+                setCurrentBgIndex(index)
+                localStorage.setItem('bgIndex', index.toString())
+              }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentBgIndex 
                   ? 'bg-white/80 w-4' 
