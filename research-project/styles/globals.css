@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Liquid Glass Effects */
+@keyframes liquidRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+  }
+}
+
+@keyframes liquidWobble {
+  0% {
+    transform: translate(var(--wobble-start-x, 0), var(--wobble-start-y, 0)) scale(1);
+  }
+  10% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.8), calc(var(--wobble-start-y, 0) * 0.8)) scale(1.05);
+  }
+  20% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.5), calc(var(--wobble-start-y, 0) * 0.5)) scale(0.98);
+  }
+  30% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.3), calc(var(--wobble-start-y, 0) * 0.3)) scale(1.02);
+  }
+  40% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.15), calc(var(--wobble-start-y, 0) * 0.15)) scale(0.99);
+  }
+  50% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.08), calc(var(--wobble-start-y, 0) * 0.08)) scale(1.01);
+  }
+  60% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.04), calc(var(--wobble-start-y, 0) * 0.04)) scale(0.995);
+  }
+  70% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.02), calc(var(--wobble-start-y, 0) * 0.02)) scale(1.005);
+  }
+  80% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.01), calc(var(--wobble-start-y, 0) * 0.01)) scale(0.998);
+  }
+  90% {
+    transform: translate(calc(var(--wobble-start-x, 0) * 0.005), calc(var(--wobble-start-y, 0) * 0.005)) scale(1.002);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.liquid-wobble-active {
+  animation: liquidWobble 1.8s ease-out forwards;
+}
+
+.liquid-pressed {
+  transform: scale(0.98);
+}
+
+.liquid-glass {
+  position: relative;
+  border: 1px solid;
+}
