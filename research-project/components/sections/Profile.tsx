@@ -96,7 +96,7 @@ export function Profile({ className = '' }: ProfileProps) {
         </LiquidGlass>
       </div>
 
-            {/* Current Focus */}
+      {/* Current Focus */}
       <LiquidGlass
         variant="card"
         intensity="subtle"

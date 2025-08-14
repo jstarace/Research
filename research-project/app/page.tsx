@@ -120,7 +120,7 @@ export default function HomePage() {
   useEffect(() => {
     const checkScreenSize = () => {
       const wasLargeScreen = isLargeScreen
-      const nowLargeScreen = window.innerWidth > 1670
+      const nowLargeScreen = window.innerWidth > 1750
       setIsLargeScreen(nowLargeScreen)
       
       // Hide menu when shrinking below threshold

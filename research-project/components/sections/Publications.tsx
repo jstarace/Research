@@ -20,6 +20,16 @@ interface Publication {
   status?: 'published' | 'accepted' | 'under-review' | 'in-preparation'
 }
 
+// Author profiles - add URLs here as co-authors provide them
+const authorProfiles: { [key: string]: string } = {
+  'Terence Soule Ph.D.': 'https://www.linkedin.com/in/terence-soule-1218b416/',
+  'Jennie Tafoya': 'https://www.linkedin.com/in/jennie-tafoya/',
+  'Anmol Singh': 'https://www.linkedin.com/in/anmol-s-288078172/',
+  'Dr. Terence Soule': 'https://www.linkedin.com/in/terence-soule/',
+  // Add more author profiles here as needed
+  // Format: 'Author Name': 'URL' (leave empty string if no URL available)
+}
+
 function CollapsibleAbstract({ abstract }: { abstract: string }) {
   const [isExpanded, setIsExpanded] = useState(false)
   
@@ -79,6 +89,39 @@ function CollapsibleAbstract({ abstract }: { abstract: string }) {
   )
 }
 
+// Component to render author names with optional links
+function AuthorsList({ authors }: { authors: string }) {
+  const authorArray = authors.split(',').map(author => author.trim())
+  
+  return (
+    <p className="text-white/90 font-medium">
+      {authorArray.map((author, index) => {
+        const profileUrl = authorProfiles[author]
+        const isLastAuthor = index === authorArray.length - 1
+        const isSecondToLast = index === authorArray.length - 2
+        
+        return (
+          <span key={index}>
+            {profileUrl ? (
+              <a
+                href={profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-300 transition-colors underline decoration-dotted underline-offset-4"
+              >
+                {author}
+              </a>
+            ) : (
+              <span>{author}</span>
+            )}
+            {!isLastAuthor && (isSecondToLast ? ', and ' : ', ')}
+          </span>
+        )
+      })}
+    </p>
+  )
+}
+
 export function Publications({ className = '' }: PublicationsProps) {
   const publications: Publication[] = [
     {
@@ -119,7 +162,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
     },
     {
       title: "Deceptive Algorithms in Massive Multiplayer Online Role Playing Games (MMOs)",
-      authors: "Jason Starace, Anmol Singh, Dr. Terence Soule",
+      authors: "Jason Starace, Anmol Singh, Terence Soule Ph.D.",
       venue: "Joint Conference on Serious Games 2024",
       journal: "Serious Games: 10th Joint International Conference",
       year: "2024",
@@ -259,9 +302,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
               </h3>
 
               {/* Authors */}
-              <p className="text-white/90 font-medium">
-                {pub.authors}
-              </p>
+              <AuthorsList authors={pub.authors} />
 
               {/* Venue and Journal */}
               <div className="space-y-1">
