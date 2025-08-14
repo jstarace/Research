@@ -89,7 +89,7 @@ export function Profile({ className = '' }: ProfileProps) {
               <p className="text-sm">University of Idaho • 2020-2023</p>
             </div>
             <div>
-              <h4 className="font-semibold text-white">B.S. in Computer Engineering</h4>
+              <h4 className="font-semibold text-white">B.S. in Computer Science</h4>
               <p className="text-sm">CSU - Sacramento • 2017-2020</p>
             </div>
           </div>
