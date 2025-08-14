@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { LiquidButton } from '@/components/liquid-button'
 import { LiquidGlass } from '@/components/liquid-glass'
 import { CustomIcon } from '@/components/custom-icon'
+import { Profile, Publications, Projects, Connect } from '@/components/sections'
 
 export default function HomePage() {
 
@@ -21,12 +22,16 @@ export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [showPageContent, setShowPageContent] = useState(false)
   const [isMenuExpanded, setIsMenuExpanded] = useState(false)
+  const [isLargeScreen, setIsLargeScreen] = useState(false)
+  
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   const buttons = [
     {
       id: 'profile',
-      icon: <CustomIcon src="/profile.svg" alt="Go to Profile page" size={40} />,
-      iconSmall: <CustomIcon src="/profile.svg" alt="Go to Profile page" size={24} />,
+      icon: <CustomIcon src="/buttons/profile.svg" alt="Go to Profile page" size={40} />,
+      iconSmall: <CustomIcon src="/buttons/profile.svg" alt="Go to Profile page" size={24} />,
       label: 'Profile',
       tooltip: 'Go to Profile',
       route: '/profile',
@@ -36,8 +41,8 @@ export default function HomePage() {
     },
     {
       id: 'publications',
-      icon: <CustomIcon src="/publications.svg" alt="Go to Publications page" size={40} />,
-      iconSmall: <CustomIcon src="/publications.svg" alt="Go to Publications page" size={24} />,
+      icon: <CustomIcon src="/buttons/publications.svg" alt="Go to Publications page" size={40} />,
+      iconSmall: <CustomIcon src="/buttons/publications.svg" alt="Go to Publications page" size={24} />,
       label: 'Publications',
       tooltip: 'Go to Publications',
       route: '/publications',
@@ -47,8 +52,8 @@ export default function HomePage() {
     },
     {
       id: 'projects',
-      icon: <CustomIcon src="/projects.svg" alt="Go to Projects page" size={40} />,
-      iconSmall: <CustomIcon src="/projects.svg" alt="Go to Projects page" size={24} />,
+      icon: <CustomIcon src="/buttons/projects.svg" alt="Go to Projects page" size={40} />,
+      iconSmall: <CustomIcon src="/buttons/projects.svg" alt="Go to Projects page" size={24} />,
       label: 'Projects',
       tooltip: 'Go to Projects',
       route: '/projects',
@@ -58,8 +63,8 @@ export default function HomePage() {
     },
     {
       id: 'connect',
-      icon: <CustomIcon src="/connect.svg" alt="Go to Connect page" size={40} />,
-      iconSmall: <CustomIcon src="/connect.svg" alt="Go to Connect page" size={24} />,
+      icon: <CustomIcon src="/buttons/connect.svg" alt="Go to Connect page" size={40} />,
+      iconSmall: <CustomIcon src="/buttons/connect.svg" alt="Go to Connect page" size={24} />,
       label: 'Connect',
       tooltip: 'Go to Connect',
       route: '/connect',
@@ -84,7 +89,9 @@ export default function HomePage() {
   }
 
   const handleMenuToggle = () => {
-    setIsMenuExpanded(!isMenuExpanded)
+    if (!isLargeScreen) {
+      setIsMenuExpanded(!isMenuExpanded)
+    }
   }
 
   // Initialize state from URL and localStorage on mount
@@ -107,52 +114,89 @@ export default function HomePage() {
       setCurrentBgIndex(randomIndex)
       localStorage.setItem('bgIndex', randomIndex.toString())
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Don't render until background is selected
-  if (currentBgIndex === null) {
-    return null
-  }
+  // Handle screen size detection
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const wasLargeScreen = isLargeScreen
+      const nowLargeScreen = window.innerWidth > 1670
+      setIsLargeScreen(nowLargeScreen)
+      
+      // Hide menu when shrinking below threshold
+      if (wasLargeScreen && !nowLargeScreen) {
+        setIsMenuExpanded(false)
+      }
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [isLargeScreen])
+
+  // Handle click outside to close menu (only on smaller screens)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!isLargeScreen && isMenuExpanded) {
+        if (
+          menuRef.current && 
+          !menuRef.current.contains(event.target as Node) &&
+          buttonRef.current &&
+          !buttonRef.current.contains(event.target as Node)
+        ) {
+          setIsMenuExpanded(false)
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuExpanded, isLargeScreen])
+
+  // Auto-expand menu on large screens
+  useEffect(() => {
+    if (isLargeScreen && selectedButton) {
+      setIsMenuExpanded(true)
+    }
+  }, [isLargeScreen, selectedButton])
+
+  // Use first background as default if not set yet
+  const bgIndex = currentBgIndex !== null ? currentBgIndex : 0
 
   const selectedButtonData = buttons.find(b => b.id === selectedButton)
 
-  // Page content based on selection
-  const getPageContent = () => {
+  // Render the appropriate section component
+  const renderSectionContent = () => {
     switch(selectedButton) {
       case 'profile':
-        return {
-          title: 'Profile Overview',
-          content: 'This is where your professional profile, research interests, and academic background will be displayed.',
-          bg: 'bg-gradient-to-br from-orange-500/10 to-amber-600/10'
-        }
+        return <Profile />
       case 'publications':
-        return {
-          title: 'Research Publications',
-          content: 'Browse through academic papers, journal articles, and conference presentations.',
-          bg: 'bg-gradient-to-br from-blue-500/10 to-indigo-600/10'
-        }
+        return <Publications />
       case 'projects':
-        return {
-          title: 'Current Projects',
-          content: 'Explore ongoing research projects, collaborations, and development work.',
-          bg: 'bg-gradient-to-br from-green-500/10 to-emerald-600/10'
-        }
+        return <Projects />
       case 'connect':
-        return {
-          title: 'Connect & Collaborate',
-          content: 'Find ways to connect, collaborate, or get in touch for research opportunities.',
-          bg: 'bg-gradient-to-br from-purple-500/10 to-violet-600/10'
-        }
+        return <Connect />
       default:
-        return {
-          title: 'Welcome',
-          content: 'Select a section to explore.',
-          bg: 'bg-white/10'
-        }
+        return null
     }
   }
 
-  const pageContent = getPageContent()
+  // Get background gradient for current section
+  const getSectionBackground = () => {
+    switch(selectedButton) {
+      case 'profile':
+        return 'bg-gradient-to-br from-orange-500/10 to-amber-600/10'
+      case 'publications':
+        return 'bg-gradient-to-br from-blue-500/10 to-indigo-600/10'
+      case 'projects':
+        return 'bg-gradient-to-br from-green-500/10 to-emerald-600/10'
+      case 'connect':
+        return 'bg-gradient-to-br from-purple-500/10 to-violet-600/10'
+      default:
+        return 'bg-white/10'
+    }
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -161,7 +205,7 @@ export default function HomePage() {
         <div
           key={index}
           className={`fixed left-0 top-0 right-0 bottom-0 w-full h-full bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            index === currentBgIndex ? 'opacity-100' : 'opacity-0'
+            index === bgIndex ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
             backgroundImage: `url('${bgUrl}')`,
@@ -194,13 +238,17 @@ export default function HomePage() {
             style={{ zIndex: 30 }}
           >
             <button
+              ref={buttonRef}
               onClick={handleMenuToggle}
-              className="w-16 h-16 rounded-2xl flex items-center justify-center backdrop-blur-xl bg-white/10 border border-white/20 hover:scale-105 transition-transform cursor-pointer"
+              className={`w-16 h-16 rounded-2xl flex items-center justify-center backdrop-blur-xl bg-white/10 border border-white/20 hover:scale-105 transition-transform ${
+                isLargeScreen ? 'cursor-default' : 'cursor-pointer'
+              }`}
               style={{
                 background: selectedButtonData?.activeBackground,
                 borderColor: selectedButtonData?.activeBorder,
               }}
-              title="Navigation Menu"
+              title={isLargeScreen ? selectedButtonData?.label : "Navigation Menu"}
+              disabled={isLargeScreen}
             >
               {React.cloneElement(selectedButtonData?.icon as React.ReactElement, { size: 32 })}
             </button>
@@ -209,10 +257,11 @@ export default function HomePage() {
             </h1>
           </div>
 
-          {/* Expanded Navigation Menu */}
-          {isMenuExpanded && (
+          {/* Expanded Navigation Menu - Vertical sidebar style */}
+          {(isMenuExpanded || isLargeScreen) && selectedButton && (
             <div 
-              className="fixed top-8 left-28 animate-in slide-in-from-left-2 fade-in-0 duration-300"
+              ref={menuRef}
+              className="fixed top-28 left-8 animate-in slide-in-from-top-2 fade-in-0 duration-300"
               style={{ zIndex: 35 }}
             >
               <LiquidGlass
@@ -221,15 +270,15 @@ export default function HomePage() {
                 rippleEffect={false}
                 flowOnHover={false}
                 stretchOnDrag={false}
-                className="p-2"
-                style={{ borderRadius: '16px' }}
+                className="p-3"
+                style={{ borderRadius: '20px' }}
               >
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-3">
                   {buttons.map((button) => (
                     <button
                       key={button.id}
                       onClick={() => handleButtonClick(button)}
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:scale-105 hover:translate-x-1 ${
                         button.id === selectedButton ? 'opacity-50' : 'opacity-100'
                       }`}
                       style={{
@@ -237,11 +286,13 @@ export default function HomePage() {
                         borderWidth: '1px',
                         borderStyle: 'solid',
                         borderColor: button.id === selectedButton ? button.activeBorder : 'rgba(255, 255, 255, 0.2)',
+                        minWidth: '200px',
                       }}
-                      title={button.label}
+                      title={button.tooltip}
                       disabled={button.id === selectedButton}
                     >
                       {button.iconSmall}
+                      <span className="text-white font-medium">{button.label}</span>
                     </button>
                   ))}
                 </div>
@@ -258,26 +309,7 @@ export default function HomePage() {
           style={{ zIndex: 20 }}
         >
           <div className="max-w-6xl mx-auto">
-            <div className={`${pageContent.bg} backdrop-blur-md rounded-3xl p-8 border border-white/20`}>
-              <h2 className="text-3xl font-bold text-white mb-6">
-                {pageContent.title}
-              </h2>
-              <p className="text-white/90 text-lg leading-relaxed mb-8">
-                {pageContent.content}
-              </p>
-              
-              {/* Additional content area for each page */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-xl font-semibold text-white mb-3">Section 1</h3>
-                  <p className="text-white/70">Content placeholder for {selectedButtonData?.label}</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-xl font-semibold text-white mb-3">Section 2</h3>
-                  <p className="text-white/70">Additional content area</p>
-                </div>
-              </div>
-            </div>
+            {renderSectionContent()}
           </div>
         </div>
       )}
@@ -372,7 +404,7 @@ export default function HomePage() {
                 localStorage.setItem('bgIndex', index.toString())
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentBgIndex 
+                index === bgIndex 
                   ? 'bg-white/80 w-4' 
                   : 'bg-white/40 hover:bg-white/60'
               }`}
