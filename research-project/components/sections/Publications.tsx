@@ -102,7 +102,7 @@ export function Publications({ className = '' }: PublicationsProps) {
 
 Using 19,413 gameplay sessions from an AI-controlled text-based Role Playing Game (RPG), we compared behavioral-only baselines against multi-modal approaches integrating action sequences with semantic descriptions. Traditional behavioral clustering achieved only 10% accuracy for 36-category classification, limited by semantic conflation where morally opposite actions produce identical statistical features. Our multi-modal LSTM architecture processing complete action-text pairs improved accuracy to 21%, revealing both the potential and limitations of non-conversational data.
 
-Analysis by behavioral complexity revealed the core limitation: non-neutral profiles achieved 42% accuracy (15× above random baseline), matching established benchmarks, while neutral profiles' performance dropped to 25% (still 9× above random). This performance gap exposes why behavioral-only approaches fail—identical actions like 'help the merchant' cannot reveal whether players are genuinely neutral or employing strategic patience (players who appear neutral while waiting for advantageous moments to act). Without access to player reasoning, even multi-modal approaches struggle with this distinction, though the above-baseline performance confirms that a meaningful signal exists.
+Analysis by behavioral complexity revealed the core limitation: non-neutral profiles achieved 42% accuracy (15× above random baseline), matching established benchmarks, while neutral profiles&apos; performance dropped to 25% (still 9× above random). This performance gap exposes why behavioral-only approaches fail—identical actions like &lsquo;help the merchant&rsquo; cannot reveal whether players are genuinely neutral or employing strategic patience (players who appear neutral while waiting for advantageous moments to act). Without access to player reasoning, even multi-modal approaches struggle with this distinction, though the above-baseline performance confirms that a meaningful signal exists.
 
 With game-based prediction beyond 20 categories being virtually unexplored these findings establish empirical benchmarks for complex player modeling: behavioral data plateaus at ~10% for 36 categories, while multi-modal integration enables 25% accuracy. For game designers, this provides concrete evidence that meaningful personality-based adaptation requires conversational interaction—our results demonstrate that predefined action choices alone cannot reliably capture player intent. Our systematic evaluation at a 36-category scale offers essential guidance for developing adaptive games that truly understand their players.`
 
@@ -359,7 +359,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
         <h3 className="text-xl font-semibold text-white mb-3">Collaboration Opportunities</h3>
         <p className="text-white/80 mb-4">
           Interested in collaborating on strategic AI research or discussing potential publications? 
-          I'm always open to working with fellow researchers in AI ethics, strategic behavior, and 
+          I&apos;m always open to working with fellow researchers in AI ethics, strategic behavior, and 
           interactive systems.
         </p>
         <div className="flex flex-wrap gap-3">
