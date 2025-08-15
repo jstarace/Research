@@ -35,7 +35,7 @@ export function Connect({ className = '' }: ConnectProps) {
       platform: 'LinkedIn',
       icon: '💼',
       value: 'linkedin.com/in/jason-starace',
-      url: 'www.linkedin.com/in/jason-starace',
+      url: 'https://www.linkedin.com/in/jason-starace',
     },
     {
       platform: 'GitHub',
