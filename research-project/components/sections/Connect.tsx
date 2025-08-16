@@ -88,7 +88,7 @@ export function Connect({ className = '' }: ConnectProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <LiquidGlass
           variant="card"
-          intensity="subtle"
+          intensity="medium"
           className="p-6"
         >
           <h3 className="text-2xl font-semibold text-white mb-4">Get in Touch</h3>
@@ -192,7 +192,7 @@ export function Connect({ className = '' }: ConnectProps) {
         <div className="space-y-6">
           <LiquidGlass
             variant="card"
-            intensity="subtle"
+            intensity="medium"
             className="p-6"
           >
             <h3 className="text-xl font-semibold text-white mb-4">Academic Affiliation</h3>
@@ -218,7 +218,7 @@ export function Connect({ className = '' }: ConnectProps) {
           {/* Professional Networks - moved here as 2x2 grid */}
           <LiquidGlass
             variant="card"
-            intensity="subtle"
+            intensity="medium"
             className="p-6"
           >
             <h3 className="text-lg font-semibold text-white mb-4">Professional Networks</h3>
@@ -246,7 +246,7 @@ export function Connect({ className = '' }: ConnectProps) {
           {/* Download CV/Resume Button */}
           <LiquidGlass
             variant="card"
-            intensity="subtle"
+            intensity="medium"
             className="p-4"
           >
             <a
@@ -290,7 +290,7 @@ export function Connect({ className = '' }: ConnectProps) {
       {/* Research Interests for Collaboration */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-xl font-semibold text-white mb-4">Open to Collaborate On</h3>
@@ -346,7 +346,7 @@ export function Connect({ className = '' }: ConnectProps) {
       {/* Call to Action */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6 text-center"
       >
         <p className="text-white/80 text-lg">

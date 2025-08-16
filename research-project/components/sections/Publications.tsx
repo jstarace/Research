@@ -276,7 +276,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
           <LiquidGlass
             key={index}
             variant="card"
-            intensity="subtle"
+            intensity="medium"
             className="p-6 hover:scale-[1.02] transition-transform duration-300"
           >
             <div className="flex flex-col space-y-4">
@@ -355,7 +355,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
       {/* Research Impact */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-2xl font-semibold text-white mb-4">Research Impact & Metrics</h3>
@@ -394,7 +394,7 @@ With game-based prediction beyond 20 categories being virtually unexplored these
       {/* Call to Action */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-xl font-semibold text-white mb-3">Collaboration Opportunities</h3>

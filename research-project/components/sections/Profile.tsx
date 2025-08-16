@@ -44,7 +44,7 @@ export function Profile({ className = '' }: ProfileProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <LiquidGlass
           variant="card"
-          intensity="subtle"
+          intensity="medium"
           className="p-6"
         >
           <h3 className="text-2xl font-semibold text-white mb-4">Research Interests</h3>
@@ -74,7 +74,7 @@ export function Profile({ className = '' }: ProfileProps) {
 
         <LiquidGlass
           variant="card"
-          intensity="subtle"
+          intensity="medium"
           className="p-6"
         >
           <h3 className="text-2xl font-semibold text-white mb-4">Education</h3>
@@ -99,7 +99,7 @@ export function Profile({ className = '' }: ProfileProps) {
       {/* Current Focus */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-2xl font-semibold text-white mb-4">Current Focus</h3>
@@ -124,7 +124,7 @@ export function Profile({ className = '' }: ProfileProps) {
       {/* Skills & Expertise */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-2xl font-semibold text-white mb-4">Technical Expertise</h3>
@@ -147,7 +147,7 @@ export function Profile({ className = '' }: ProfileProps) {
       {/* Professional Expertise */}
       <LiquidGlass
         variant="card"
-        intensity="subtle"
+        intensity="medium"
         className="p-6"
       >
         <h3 className="text-2xl font-semibold text-white mb-4">Professional Expertise</h3>
