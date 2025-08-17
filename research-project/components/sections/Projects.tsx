@@ -23,6 +23,12 @@ interface ProjectPaper {
   venue?: string
 }
 
+interface Collaborator {
+  name: string
+  url?: string
+  role?: string
+}
+
 interface Project {
   id: string
   title: string
@@ -30,13 +36,14 @@ interface Project {
   longDescription?: string
   keyMetrics?: string[]
   technologies: string[]
+  collaborators?: Collaborator[]
   status: 'completed' | 'in-progress' | 'planning' | 'archived'
   year: string
   category: 'research' | 'web' | 'game' | 'tool' | 'academic'
   media?: ProjectMedia[]
   papers?: ProjectPaper[]
   links?: {
-    github?: string
+    github?: string | { name: string; url: string }[]
     demo?: string
     video?: string
     website?: string
@@ -213,6 +220,37 @@ function ProjectCard({ project, layout = 'default' }: { project: Project, layout
               ))}
             </div>
             
+            {/* Collaborators */}
+            {project.collaborators && project.collaborators.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-white/90">Collaborators:</h4>
+                <div className="flex flex-wrap gap-3">
+                  {project.collaborators.map((collaborator, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      {collaborator.url ? (
+                        <a
+                          href={collaborator.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/80 hover:text-white transition-colors underline decoration-dotted underline-offset-4"
+                        >
+                          {collaborator.name}
+                        </a>
+                      ) : (
+                        <span className="text-white/80">{collaborator.name}</span>
+                      )}
+                      {collaborator.role && (
+                        <span className="text-white/60 text-xs">({collaborator.role})</span>
+                      )}
+                      {index < project.collaborators.length - 1 && (
+                        <span className="text-white/40">•</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
             {/* Action Links */}
             {project.links && (
               <div className="flex flex-wrap gap-3">
@@ -227,14 +265,28 @@ function ProjectCard({ project, layout = 'default' }: { project: Project, layout
                   </a>
                 )}
                 {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-gray-500/20 text-gray-300 rounded-lg hover:bg-gray-500/30 transition-colors border border-gray-500/30"
-                  >
-                    GitHub
-                  </a>
+                  typeof project.links.github === 'string' ? (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-500/20 text-gray-300 rounded-lg hover:bg-gray-500/30 transition-colors border border-gray-500/30"
+                    >
+                      GitHub
+                    </a>
+                  ) : (
+                    project.links.github.map((repo, index) => (
+                      <a
+                        key={index}
+                        href={repo.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-gray-500/20 text-gray-300 rounded-lg hover:bg-gray-500/30 transition-colors border border-gray-500/30"
+                      >
+                        GitHub: {repo.name}
+                      </a>
+                    ))
+                  )
                 )}
                 {project.links.video && (
                   <a
@@ -410,6 +462,10 @@ export function Projects({ className = '' }: ProjectsProps) {
         'Collaborative workflow supporting 4+ researchers'
       ],
       technologies: ['Node.js', 'Express.js', 'REST APIs', 'Xata', 'Clerk', 'React', 'TypeScript', 'Git', 'Vercel', 'CI/CD'],
+      collaborators: [
+        { name: 'Jennie Tafoya', url: 'https://www.linkedin.com/in/jennie-tafoya/' },
+        { name: 'Anmol Singh', url: 'https://www.linkedin.com/in/anmol-s-288078172/' }
+      ],
       status: 'completed',
       year: '2024',
       category: 'research',
@@ -426,6 +482,35 @@ export function Projects({ className = '' }: ProjectsProps) {
         //github: 'https://github.com/example/deceptive-agents',
         //paper: '/publications#deceptive-algorithms',
         //video: 'https://youtube.com/watch?v=example'
+      }
+    },
+    {
+      id: 'academic_1',
+      title: 'Digital Twin Development for Assistive Robotics: Virtual Campus Integration and Real-Time Robot Simulation',
+      description: 'Developed a comprehensive digital twin platform integrating University of Idaho campus modeling with real-time robotic arm simulation, bridging virtual environments and physical assistive robotics systems.',
+      longDescription: 'Created a two-semester comprehensive digital twin project combining high-fidelity 3D campus modeling with real-time robotics simulation. Phase 1 involved developing a complete virtual University of Idaho campus using ArcGIS data, Maya modeling, and Unreal Engine 5, including precise architectural recreation of the IRIC building from blueprints and AI-powered interactive experiences. Phase 2 implemented real-time digital twin functionality using Rust, MQTT, and C++ to simulate the Blue Sabino robotic arm with accurate data integration and movement replication in the virtual environment.',
+      technologies:['ArcGIS', 'Maya', 'Unreal Engine 5', 'SolidWorks', 'Rust', 'C++', 'MQTT'],
+      collaborators: [
+      { name: 'Nathan Summers', url: 'https://ncolesummers.com' },
+      { name: 'Assistive Robotics Lab', url: 'https://www.uidaho.edu/engineering'}
+      ],
+      status: 'completed',
+      year: '2023',
+      category: 'academic',
+      featured: true,
+            media: [
+      {
+        type: 'image',
+        url: '/images/the_arm.png',
+        alt: '3D wireframe model of the Blue Sabino robotic arm displayed in Maya software, showing detailed mesh topology with blue wireframe lines outlining the complex mechanical structure including articulated joints, actuators, and mounting base.',
+        caption: 'Blue Sabino robotic arm 3D model in Maya showing wireframe mesh topology. The model was converted from SolidWorks CAD files and integrated into Unreal Engine 5 with full constraint systems for accurate digital twin simulation in the virtual Assistive Robotics Lab environment.'
+      }
+      ],
+      links: {
+        github: [
+          { name: 'Subscribe & Store', url: 'https://github.com/ncolesummers/subscribe-and-store' },
+          { name: 'Sabino Robot', url: 'https://github.com/ncolesummers/Sabino' }
+        ]
       }
     },
     {
