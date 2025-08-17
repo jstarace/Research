@@ -242,7 +242,7 @@ function ProjectCard({ project, layout = 'default' }: { project: Project, layout
                       {collaborator.role && (
                         <span className="text-white/60 text-xs">({collaborator.role})</span>
                       )}
-                      {index < project.collaborators.length - 1 && (
+                      {index < project.collaborators!.length - 1 && (
                         <span className="text-white/40">•</span>
                       )}
                     </div>
