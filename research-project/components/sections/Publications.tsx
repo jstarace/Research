@@ -137,10 +137,10 @@ export function Publications({ className = '' }: PublicationsProps) {
     {
       title: "A Systematic Evaluation of Multi-modal Approaches to Complex Player Profile Classification",
       authors: "Jason Starace, Terence Soule Ph.D.",
-      venue: "Games and Learning Alliance 2025",
+      venue: "",
       year: "2025",
-      type: "conference",
-      status: "under-review",
+      type: "preprint",
+      status: "in-preparation",
       abstract: `Modern adaptive games require nuanced player understanding for personalization, yet current modeling approaches use simplified 5-10 category taxonomies that inadequately capture player diversity. Existing behavioral clustering cannot distinguish players with different motivations who exhibit similar actions. We present a systematic evaluation of multi-modal classification at realistic scales, examining how behavioral telemetry combined with semantic context performs when supporting 36 distinct player profiles.
 
 Using 19,413 gameplay sessions from an AI-controlled text-based Role Playing Game (RPG), we compared behavioral-only baselines against multi-modal approaches integrating action sequences with semantic descriptions. Traditional behavioral clustering achieved only 10% accuracy for 36-category classification, limited by semantic conflation where morally opposite actions produce identical statistical features. Our multi-modal LSTM architecture processing complete action-text pairs improved accuracy to 21%, revealing both the potential and limitations of non-conversational data.
