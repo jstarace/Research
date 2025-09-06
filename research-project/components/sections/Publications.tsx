@@ -22,10 +22,10 @@ interface Publication {
 
 // Author profiles - add URLs here as co-authors provide them
 const authorProfiles: { [key: string]: string } = {
-  'Terence Soule Ph.D.': 'https://www.linkedin.com/in/terence-soule-1218b416/',
+  'Terence Soule Ph.D.': 'https://verso.uidaho.edu/esploro/profile/terry_soule/overview?institution=01ALLIANCE_UID',
   'Jennie Tafoya': 'https://www.linkedin.com/in/jennie-tafoya/',
   'Anmol Singh': 'https://www.linkedin.com/in/anmol-s-288078172/',
-  'Dr. Terence Soule': 'https://www.linkedin.com/in/terence-soule/',
+  'Dr. Terence Soule': 'https://verso.uidaho.edu/esploro/profile/terry_soule/overview?institution=01ALLIANCE_UID',
   // Add more author profiles here as needed
   // Format: 'Author Name': 'URL' (leave empty string if no URL available)
 }
